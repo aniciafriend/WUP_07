@@ -69,8 +69,31 @@ Out of all the alive groups, 12% more women than men survived. Out of the dead g
 
 ## Inferential results 
 
+```{r}
+# Create the contingency table
+table1 <- xtabs(~result + Sex, data = kRdata)
 
+# Chi-Square Test
+chi_result <- chisq.test(table1)
 
+cat("Chi-Square Test Results:\n")
+print(chi_result)
+
+cat("\nExpected Counts:\n")
+print(chi_result$expected)
+
+cat("\nResiduals:\n")
+print(chi_result$residuals)
+
+# Fisher's Exact Test
+fisher_result <- fisher.test(table1)
+
+cat("\nFisher's Exact Test p-value:\n")
+print(fisher_result$p.value)
+
+```
+
+In our Chi-Square result, we received a p-value of 0.0012. Since this is <0.05 (our point of significance), we reject our null (that dying is not independent of sex). In our Fishers test, we received a p-value of 0.0009 which is also <0.05, we again will be rejecting the null hypothesis. 
 
 ## Conclusions
 
